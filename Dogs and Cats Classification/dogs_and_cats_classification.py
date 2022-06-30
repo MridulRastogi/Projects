@@ -1,4 +1,5 @@
 import tensorflow as tf
+import keras
 from keras.models import Sequential
 from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
@@ -41,12 +42,12 @@ test_set = test_datagen.flow_from_directory('test_set/',
                                             batch_size = 32,
                                             class_mode = 'binary')
 
-cnn.fit(x = training_set, validation_data = test_set, epochs = 5)
+cnn.fit(x = training_set, validation_data = test_set, epochs = 1)
 
 import numpy as np
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 
-test_image = tf.keras.utils.load_img('single_prediction/cat_or_dog_1.jpg', target_size = (64, 64))
+test_image = image.load_img('single_prediction/cat_or_dog_1.jpg', target_size = (64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = cnn.predict(test_image)
